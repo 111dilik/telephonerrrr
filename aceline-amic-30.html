@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Настольный микрофон Acelline — Telephonerrr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html[data-theme="light"] {
+    --bg: #ffffff; --bg-soft: #f4f9f4; --card: #ffffff;
+    --border: #e3ede3; --text: #0e1a0e; --text-soft: #5a6b5a;
+    --accent: #16a34a; --accent-soft: #dcfce7; --accent-hover: #15803d;
+  }
+  html[data-theme="dark"] {
+    --bg: #0b1310; --bg-soft: #101a16; --card: #142019;
+    --border: #1f2f26; --text: #e8f5ec; --text-soft: #8fa696;
+    --accent: #22c55e; --accent-soft: #14331f; --accent-hover: #4ade80;
+  }
+  html[data-theme="black"] {
+    --bg: #000000; --bg-soft: #0a0a0a; --card: #111111;
+    --border: #1f1f1f; --text: #ffffff; --text-soft: #888888;
+    --accent: #22c55e; --accent-soft: #0f2417; --accent-hover: #4ade80;
+  }
+  html[data-theme="blue"] {
+    --bg: #f6faff; --bg-soft: #eaf2ff; --card: #ffffff;
+    --border: #d6e4f7; --text: #0a1a33; --text-soft: #5a6b85;
+    --accent: #2563eb; --accent-soft: #dbeafe; --accent-hover: #1d4ed8;
+  }
+  html[data-theme="amber"] {
+    --bg: #fffbf2; --bg-soft: #fef3d9; --card: #ffffff;
+    --border: #f2e2b8; --text: #2a1d00; --text-soft: #7a6a3f;
+    --accent: #d97706; --accent-soft: #fef3c7; --accent-hover: #b45309;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Commissioner', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  header.site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; gap: 20px; flex-wrap: nowrap;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700; font-size: 22px;
+    letter-spacing: -0.3px; white-space: nowrap; flex-shrink: 0;
+  }
+  .logo-img { width: 34px; height: 34px; object-fit: contain; flex-shrink: 0; }
+  .logo-accent { color: var(--accent); }
+
+  .themes { display: flex; gap: 8px; flex-shrink: 0; }
+  .theme-btn {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer; padding: 0;
+    transition: transform .15s, border-color .15s;
+  }
+  .theme-btn:hover { transform: scale(1.15); }
+  .theme-btn.active { border-color: var(--accent); transform: scale(1.15); }
+  .theme-light { background: linear-gradient(135deg, #ffffff 50%, #16a34a 50%); }
+  .theme-dark  { background: linear-gradient(135deg, #0b1310 50%, #22c55e 50%); }
+  .theme-black { background: linear-gradient(135deg, #000000 50%, #22c55e 50%); }
+  .theme-blue  { background: linear-gradient(135deg, #f6faff 50%, #2563eb 50%); }
+  .theme-amber { background: linear-gradient(135deg, #fffbf2 50%, #d97706 50%); }
+
+  .breadcrumb {
+    padding: 24px 0 0;
+    font-size: 14px; color: var(--text-soft);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--text-soft); transition: color .15s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { opacity: 0.4; }
+  .breadcrumb .current { color: var(--text); }
+
+  .article-page { padding: 20px 0 60px; }
+  .article-wrap { max-width: 720px; margin: 0 auto; }
+
+  .article-category {
+    display: inline-block;
+    padding: 5px 12px; border-radius: 100px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin-bottom: 18px;
+  }
+
+  .article-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.4px;
+    margin-bottom: 28px; color: var(--text);
+  }
+
+  .article-hero {
+    margin: 0 0 32px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-hero img { width: 100%; height: auto; display: block; }
+
+  .article-content {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .article-content p { margin-bottom: 20px; }
+  .article-content .lead {
+    font-size: 19px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .article-content h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(22px, 3vw, 26px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin: 44px 0 18px;
+  }
+  .article-content ul {
+    margin: 0 0 22px 22px;
+    padding: 0;
+  }
+  .article-content li { margin-bottom: 8px; }
+  .article-content strong { font-weight: 700; }
+
+  .article-content figure {
+    margin: 32px 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-content figure img { width: 100%; height: auto; display: block; }
+
+  .article-content .disclaimer {
+    margin: 24px 0;
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    color: var(--text-soft);
+    font-size: 15px;
+  }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pros-cons > div {
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .pros-cons h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .pros-cons ul { margin: 0; padding: 0; list-style: none; }
+  .pros-cons li {
+    font-size: 15px;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .pros-cons .pros h3 { color: var(--accent); }
+  .pros-cons .cons h3 { color: #e11d48; }
+  .pros-cons .pros li::before {
+    content: "+"; position: absolute; left: 4px;
+    color: var(--accent); font-weight: 700;
+  }
+  .pros-cons .cons li::before {
+    content: "−"; position: absolute; left: 4px;
+    color: #e11d48; font-weight: 700;
+  }
+
+  .verdict {
+    margin: 36px 0 20px;
+    padding: 28px 30px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+  }
+  .verdict h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .article-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    margin: 32px 0 0;
+    padding: 22px 26px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    transition: transform .15s, background .15s, border-color .15s;
+  }
+  .article-cta:hover {
+    transform: translateY(-2px);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .article-cta:hover .article-cta-label,
+  .article-cta:hover .article-cta-desc,
+  .article-cta:hover .article-cta-arrow { color: #fff; }
+  .article-cta-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    transition: color .15s;
+  }
+  .article-cta-desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    transition: color .15s;
+  }
+  .article-cta-arrow {
+    font-size: 24px;
+    color: var(--accent);
+    transition: color .15s, transform .15s;
+  }
+  .article-cta:hover .article-cta-arrow { transform: translateX(4px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 30px;
+    background: var(--bg-soft);
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { color: var(--text-soft); font-size: 14px; }
+  .footer-nav { display: flex; gap: 24px; font-size: 14px; }
+  .footer-nav a { color: var(--text-soft); transition: color .15s; }
+  .footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .logo { font-size: 18px; }
+    .logo-img { width: 28px; height: 28px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .article-content { font-size: 16px; }
+    .article-cta { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/Logo.webp" alt="Telephonerrr" class="logo-img" onerror="this.style.display='none'">
+      <span>Telephone<span class="logo-accent">rrr</span></span>
+    </a>
+
+    <div class="themes" id="themes">
+      <button class="theme-btn theme-light active" data-theme="light" title="Светлая"></button>
+      <button class="theme-btn theme-dark" data-theme="dark" title="Тёмная"></button>
+      <button class="theme-btn theme-black" data-theme="black" title="Чёрная"></button>
+      <button class="theme-btn theme-blue" data-theme="blue" title="Синяя"></button>
+      <button class="theme-btn theme-amber" data-theme="amber" title="Янтарная"></button>
+    </div>
+  </div>
+</header>
+
+<main class="article-page">
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <span class="sep">/</span>
+      <a href="#">Аудио</a>
+      <span class="sep">/</span>
+      <span class="current">Acelline AMIC 30</span>
+    </nav>
+
+    <div class="article-wrap">
+
+      <div class="article-category">Аудио</div>
+
+      <h1 class="article-title">Настольный микрофон Acelline за 370 рублей: обзор самого дешёвого микрофона из DNS</h1>
+
+      <figure class="article-hero">
+        <img src="images/aceline amic 30/aceline amic-30 3.png" alt="Acelline AMIC 30">
+      </figure>
+
+      <div class="article-content">
+
+        <h2>Введение</h2>
+
+        <p class="lead">После эксперимента с самой дешёвой клавиатурой из DNS за 300 рублей автор канала «Телефонер» решил продолжить исследование бюджетного сегмента и приобрёл самый недорогой настольный микрофон — модель от Acelline стоимостью 370 рублей. Цель обзора — выяснить, способен ли микрофон за такую цену обеспечить приемлемое качество звука для записи видео, голосового общения или стриминга. Дополнительно проводится сравнение с микрофоном на беспроводных наушниках VGN VXE V1 за 2000 рублей, обзор которых уже выходил на канале.</p>
+
+        <div class="disclaimer">
+          Сразу стоит отметить: это не реклама, автор не получал оплату за обзор. Все выводы основаны на личном опыте использования.
+        </div>
+
+        <h2>Комплектация и внешний вид</h2>
+
+        <p>Микрофон поставляется в стандартной коробке. В комплект входят:</p>
+
+        <ul>
+          <li>сам микрофон с несъёмным кабелем;</li>
+          <li>подставка для установки на ПК;</li>
+          <li>инструкция.</li>
+        </ul>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 1.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <p>На корпусе микрофона есть кнопка включения и выключения. Подставка регулируется по высоте, однако на её основании отсутствуют противоскользящие накладки, поэтому она свободно скользит по столу. Это создаёт неудобства при использовании.</p>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 2.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <p>Сам микрофон выглядит неплохо для своей цены, но лёгкий вес и дешёвый пластик сразу выдают бюджетное происхождение. Кабель Mini-Jack 3,5 мм подключается только в материнскую плату — через переднюю панель корпуса работать не будет. Длина кабеля составляет 1,8 метра, что может создавать неудобства, если компьютер стоит близко к пользователю.</p>
+
+        <h2>Качество звука</h2>
+
+        <p>Это ключевой аспект обзора. Результаты тестирования показали неоднозначную картину.</p>
+
+        <ul>
+          <li><strong>Близкое расстояние.</strong> Когда говоришь прямо перед микрофоном, шумоподавление работает хорошо, и звук остаётся чистым. Задержки звука нет.</li>
+          <li><strong>Среднее расстояние.</strong> Главный недостаток микрофона — очень тихий сигнал. С расстояния полметра вас практически не слышно. Даже когда микрофон стоит на столе в 10 сантиметрах от рта, звук воспринимается так, будто вы говорите шёпотом.</li>
+          <li><strong>Шумоподавление.</strong> Автор провёл отдельный тест: на фоне включил звук вентилятора на телефоне на полную громкость, телефон лежал в полуметре от микрофона. В результате шум вентилятора практически не слышен. Это хороший показатель для бюджетного устройства.</li>
+        </ul>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 4.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 5.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <h2>Сравнение с микрофоном на наушниках VGN VXE V1</h2>
+
+        <p>Для сравнения использовался микрофон на беспроводных наушниках VGN VXE V1 стоимостью около 2000 рублей. Результаты тестов:</p>
+
+        <ul>
+          <li><strong>Просто с одетыми наушниками.</strong> Звук подскочил до самых высоких частот, до красного уровня. Это говорит о высокой чувствительности микрофона наушников.</li>
+          <li><strong>Наушники лежат на столе.</strong> Качество звука снижается, но остаётся приемлемым.</li>
+          <li><strong>Шумоподавление на наушниках.</strong> При включённом вентиляторе на полную громкость шум чуть-чуть слышен, частота находится в зелёной зоне. Это хуже, чем у настольного микрофона Acelline.</li>
+        </ul>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 6.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <p>Важное преимущество наушников — возможность говорить даже из другой комнаты, так как они беспроводные. Однако качество звука у микрофона на наушниках «так себе»: он не такой мягкий и стабильный, как у настольного микрофона. Кроме того, на наушниках можно включать и выключать шумоподавление, что даёт дополнительную гибкость.</p>
+
+        <h2>Тест с клавиатурой</h2>
+
+        <p>Автор также провёл тест шумоподавления при нажатии клавиш на клавиатуре. Микрофон Acelline справился с этой задачей: звук клавиш не заглушал голос.</p>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 7.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <h2>Плюсы и минусы</h2>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h3>Плюсы</h3>
+            <ul>
+              <li>Чистое звучание вблизи</li>
+              <li>Низкая цена (370 ₽)</li>
+              <li>Лёгкий корпус</li>
+              <li>Не требуются драйверы и утилиты</li>
+              <li>Хорошее шумоподавление для своей ценовой категории</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h3>Минусы</h3>
+            <ul>
+              <li>Очень тихий звук на расстоянии (полметра и более)</li>
+              <li>Подставка скользит по столу</li>
+              <li>Подключение только в материнскую плату</li>
+              <li>Короткий кабель (1,8 м)</li>
+            </ul>
+          </div>
+        </div>
+
+        <figure>
+          <img src="images/aceline amic 30/aceline amic-30 8.png" alt="Acelline AMIC 30">
+        </figure>
+
+        <div class="verdict">
+          <h2>Итог</h2>
+          <p>Настольный микрофон Acelline за 370 рублей оказался лучше, чем ожидалось. Автор признаётся, что предполагал увидеть качество «как у рации», но устройство показало себя достойно для своей цены. Главный недостаток — плохой звук на расстоянии, что ограничивает его использование. Микрофон подойдёт для записи видео, когда вы находитесь близко к нему, или для голосового общения, если не отходить далеко от стола.</p>
+          <p>Если есть возможность, автор рекомендует немного подкопить и приобрести микрофон за 1000 рублей — например, HyperX M8 или M009. Но если бюджет совсем ограничен, Acelline за 370 рублей справится с базовыми задачами.</p>
+          <p>Для своей цены микрофон хорош, но не ждите от него чудес. Это устройство для тех, кто готов мириться с компромиссами ради экономии.</p>
+        </div>
+
+        <a class="article-cta" href="https://www.youtube.com/watch?v=YU6eETciAqc&t=152s" target="_blank" rel="noopener">
+          <div>
+            <div class="article-cta-label">Канал Telephonerrr</div>
+            <div class="article-cta-desc">Смотреть видеообзор на YouTube</div>
+          </div>
+          <span class="article-cta-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Telephonerrr. Обзоры без воды.</p>
+    <div class="footer-nav">
+      <a href="#">Telegram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(name) {
+      html.setAttribute('data-theme', name);
+      buttons.forEach(function(b) {
+        b.classList.toggle('active', b.dataset.theme === name);
+      });
+      try { localStorage.setItem('telephonerrr-theme', name); } catch (e) {}
+    }
+
+    var saved = 'light';
+    try { saved = localStorage.getItem('telephonerrr-theme') || 'light'; } catch (e) {}
+    setTheme(saved);
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTheme(btn.dataset.theme);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

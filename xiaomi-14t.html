@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обзор Xiaomi 14T — Telephonerrr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html[data-theme="light"] {
+    --bg: #ffffff; --bg-soft: #f4f9f4; --card: #ffffff;
+    --border: #e3ede3; --text: #0e1a0e; --text-soft: #5a6b5a;
+    --accent: #16a34a; --accent-soft: #dcfce7; --accent-hover: #15803d;
+  }
+  html[data-theme="dark"] {
+    --bg: #0b1310; --bg-soft: #101a16; --card: #142019;
+    --border: #1f2f26; --text: #e8f5ec; --text-soft: #8fa696;
+    --accent: #22c55e; --accent-soft: #14331f; --accent-hover: #4ade80;
+  }
+  html[data-theme="black"] {
+    --bg: #000000; --bg-soft: #0a0a0a; --card: #111111;
+    --border: #1f1f1f; --text: #ffffff; --text-soft: #888888;
+    --accent: #22c55e; --accent-soft: #0f2417; --accent-hover: #4ade80;
+  }
+  html[data-theme="blue"] {
+    --bg: #f6faff; --bg-soft: #eaf2ff; --card: #ffffff;
+    --border: #d6e4f7; --text: #0a1a33; --text-soft: #5a6b85;
+    --accent: #2563eb; --accent-soft: #dbeafe; --accent-hover: #1d4ed8;
+  }
+  html[data-theme="amber"] {
+    --bg: #fffbf2; --bg-soft: #fef3d9; --card: #ffffff;
+    --border: #f2e2b8; --text: #2a1d00; --text-soft: #7a6a3f;
+    --accent: #d97706; --accent-soft: #fef3c7; --accent-hover: #b45309;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Commissioner', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  header.site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 20px;
+    flex-wrap: nowrap;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .logo-img { width: 34px; height: 34px; object-fit: contain; flex-shrink: 0; }
+  .logo-accent { color: var(--accent); }
+
+  .themes { display: flex; gap: 8px; flex-shrink: 0; }
+  .theme-btn {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer; padding: 0;
+    transition: transform .15s, border-color .15s;
+  }
+  .theme-btn:hover { transform: scale(1.15); }
+  .theme-btn.active { border-color: var(--accent); transform: scale(1.15); }
+  .theme-light { background: linear-gradient(135deg, #ffffff 50%, #16a34a 50%); }
+  .theme-dark  { background: linear-gradient(135deg, #0b1310 50%, #22c55e 50%); }
+  .theme-black { background: linear-gradient(135deg, #000000 50%, #22c55e 50%); }
+  .theme-blue  { background: linear-gradient(135deg, #f6faff 50%, #2563eb 50%); }
+  .theme-amber { background: linear-gradient(135deg, #fffbf2 50%, #d97706 50%); }
+
+  .breadcrumb {
+    padding: 24px 0 0;
+    font-size: 14px;
+    color: var(--text-soft);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--text-soft); transition: color .15s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { opacity: 0.4; }
+  .breadcrumb .current { color: var(--text); }
+
+  .article-page { padding: 20px 0 60px; }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .article-category {
+    display: inline-block;
+    padding: 5px 12px; border-radius: 100px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin-bottom: 18px;
+  }
+
+  .article-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.4px;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  .article-hero {
+    margin: 0 0 32px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-hero img { width: 100%; height: auto; display: block; }
+
+  .article-content {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .article-content p { margin-bottom: 20px; }
+  .article-content .lead {
+    font-size: 19px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .article-content h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(22px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin: 44px 0 18px;
+  }
+  .article-content ul {
+    margin: 0 0 22px 22px;
+    padding: 0;
+  }
+  .article-content li { margin-bottom: 8px; }
+  .article-content strong { font-weight: 700; }
+
+  .article-content figure {
+    margin: 32px 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-content figure img { width: 100%; height: auto; display: block; }
+  .article-content figcaption {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-align: center;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border);
+  }
+
+  .specs {
+    margin: 32px 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .specs table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .specs td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .specs tr:last-child td { border-bottom: none; }
+  .specs td:first-child { color: var(--text-soft); width: 42%; font-weight: 500; }
+  .specs td:last-child { font-weight: 600; }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pros-cons > div {
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .pros-cons h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .pros-cons ul { margin: 0; padding: 0; list-style: none; }
+  .pros-cons li {
+    font-size: 15px;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .pros-cons .pros h3 { color: var(--accent); }
+  .pros-cons .cons h3 { color: #e11d48; }
+  .pros-cons .pros li::before {
+    content: "+"; position: absolute; left: 4px;
+    color: var(--accent); font-weight: 700;
+  }
+  .pros-cons .cons li::before {
+    content: "−"; position: absolute; left: 4px;
+    color: #e11d48; font-weight: 700;
+  }
+
+  .verdict {
+    margin: 36px 0 20px;
+    padding: 28px 30px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+  }
+  .verdict h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .article-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 32px 0 0;
+    padding: 22px 26px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    transition: transform .15s, background .15s, border-color .15s;
+  }
+  .article-cta:hover {
+    transform: translateY(-2px);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .article-cta:hover .article-cta-label,
+  .article-cta:hover .article-cta-desc,
+  .article-cta:hover .article-cta-arrow { color: #fff; }
+  .article-cta-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    transition: color .15s;
+  }
+  .article-cta-desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    transition: color .15s;
+  }
+  .article-cta-arrow {
+    font-size: 24px;
+    color: var(--accent);
+    transition: color .15s, transform .15s;
+  }
+  .article-cta:hover .article-cta-arrow { transform: translateX(4px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 30px;
+    background: var(--bg-soft);
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { color: var(--text-soft); font-size: 14px; }
+  .footer-nav { display: flex; gap: 24px; font-size: 14px; }
+  .footer-nav a { color: var(--text-soft); transition: color .15s; }
+  .footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .logo { font-size: 18px; }
+    .logo-img { width: 28px; height: 28px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .article-content { font-size: 16px; }
+    .article-cta { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/Logo.webp" alt="Telephonerrr" class="logo-img" onerror="this.style.display='none'">
+      <span>Telephone<span class="logo-accent">rrr</span></span>
+    </a>
+
+    <div class="themes" id="themes">
+      <button class="theme-btn theme-light active" data-theme="light" title="Светлая"></button>
+      <button class="theme-btn theme-dark" data-theme="dark" title="Тёмная"></button>
+      <button class="theme-btn theme-black" data-theme="black" title="Чёрная"></button>
+      <button class="theme-btn theme-blue" data-theme="blue" title="Синяя"></button>
+      <button class="theme-btn theme-amber" data-theme="amber" title="Янтарная"></button>
+    </div>
+  </div>
+</header>
+
+<main class="article-page">
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <span class="sep">/</span>
+      <a href="#">Смартфоны</a>
+      <span class="sep">/</span>
+      <span class="current">Xiaomi 14T</span>
+    </nav>
+
+    <div class="article-wrap">
+
+      <div class="article-category">Смартфоны</div>
+
+      <h1 class="article-title">Обзор Xiaomi 14T: сбалансированный субфлагман с мощным железом и компромиссами</h1>
+
+      <figure class="article-hero">
+        <img src="images/xiaomi 14t/xiaomi 14t 1.webp" alt="Xiaomi 14T">
+      </figure>
+
+      <div class="article-content">
+
+        <p class="lead">В 2024 году компания Xiaomi представила модель Xiaomi 14T — субфлагманское устройство, которое призвано предложить пользователям высокую производительность и передовые технологии по доступной цене. Мы провели длительное тестирование смартфона (более месяца) и делимся подробными впечатлениями: дизайн, камеры, производительность, автономность и программное обеспечение.</p>
+
+        <h2>Комплектация и дизайн</h2>
+
+        <p>Устройство поставляется в белой коробке в полной комплектации: инструкция, матовый чехол темного цвета, кабель, а также блок зарядки мощностью 67 Вт. Тестируемая версия — глобальная, в черном цвете.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 2.webp" alt="Комплектация Xiaomi 14T">
+          <figcaption>Комплектация: чехол, кабель, зарядка 67 Вт</figcaption>
+        </figure>
+
+        <p>Xiaomi 14T имеет стеклянную заднюю крышку, которая не оставляет следов, но отличается повышенной скользкостью. Однако при выборе лаймового цвета крышка выполнена из экокожи, что делает устройство более практичным. Блок камер расположен аналогично Poco X6 Pro. Производитель использовал пластиковые вставки в конструкции, что многие воспринимают как минус. Тем не менее, это позволило снизить стоимость устройства, сохранив мощную начинку. Кроме того, большинство пользователей носят смартфон в чехле, что нивелирует данный недостаток.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 3.webp" alt="Дизайн Xiaomi 14T">
+          <figcaption>Стеклянная задняя крышка и блок камер</figcaption>
+        </figure>
+
+        <h2>Камеры</h2>
+
+        <p>Оптическая система разработана совместно с Leica, что обеспечивает высокое качество снимков. Основные характеристики:</p>
+
+        <ul>
+          <li><strong>Основной модуль:</strong> 50 Мп</li>
+          <li><strong>Телевик:</strong> 50 Мп</li>
+          <li><strong>Широкоугольный объектив:</strong> 12 Мп</li>
+        </ul>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 4.webp" alt="Камеры Xiaomi 14T">
+          <figcaption>Блок камер с оптикой Leica</figcaption>
+        </figure>
+
+        <p>Присутствует оптическая стабилизация. Видеосъемка возможна в 4K при 60 кадрах в секунду (основная камера) и в 4K при 30 кадрах в секунду (широкоугольная). Видеозум 12x сопровождается заметным уровнем шума, особенно в условиях недостаточной освещенности. Фронтальная камера на 32 Мп также поддерживает запись 4K при 30 к/с.</p>
+
+        <p>Среди режимов съемки выделяются длинная выдержка, «движение толпы» и «мгновенный шлейф». По субъективному мнению автора обзора, камеры Xiaomi 14T превосходят по качеству такие модели, как Xiaomi 12 Ultra, iPhone 14, Oppo Find X5 Pro, Honor 200 и ряд устройств Realme.</p>
+
+        <h2>Производительность и нагрев</h2>
+
+        <p>Xiaomi 14T оснащен 12 ГБ оперативной памяти с возможностью расширения до 24 ГБ (виртуально) и процессором MediaTek Dimensity 8300 Ultra. Графический ускоритель — Mali-G615. В обычном режиме устройство набирает около 1 000 000 баллов в бенчмарках, а в высокопроизводительном — до 1 300 000.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 5.webp" alt="Производительность Xiaomi 14T">
+          <figcaption>Dimensity 8300 Ultra и 12 ГБ оперативной памяти</figcaption>
+        </figure>
+
+        <p>Несмотря на мощные характеристики, смартфон подвержен нагреву даже при базовых задачах и во время зарядки. Однако нагрев быстро сменяется охлаждением: например, в играх через 5 минут температура стабилизируется. Троттлинг минимален — производительность падает лишь до 87%. В игре PUBG Mobile на максимальных настройках графики устройство выдает стабильные 90–100 FPS.</p>
+
+        <h2>Автономность</h2>
+
+        <p>Аккумулятор емкостью 5000 мА·ч поддерживает зарядку мощностью 67 Вт. Беспроводная зарядка отсутствует (в отличие от версии Pro). При интенсивном использовании (игры, съемка) заряда хватает на день, но может потребоваться две зарядки. В целом автономность оценивается как хорошая.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 6.webp" alt="Автономность Xiaomi 14T">
+          <figcaption>Аккумулятор 5000 мА·ч, зарядка 67 Вт</figcaption>
+        </figure>
+
+        <h2>Экран</h2>
+
+        <p>Установлен AMOLED-дисплей диагональю 6,67 дюйма с пиковой яркостью 4000 нит. Частота обновления 144 Гц доступна только в играх; в повседневных задачах — стабильные 120 Гц. Экран очень яркий, что особенно заметно после перехода с IPS-дисплеев. По размеру устройство занимает промежуточное положение между «лопатой» и компактным смартфоном.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 7.webp" alt="Экран Xiaomi 14T">
+          <figcaption>AMOLED 6,67" с частотой 144 Гц</figcaption>
+        </figure>
+
+        <h2>Программное обеспечение</h2>
+
+        <p>Смартфон работает на оболочке HyperOS 2. Она отличается быстродействием, оптимизацией и широкими возможностями кастомизации. Критика HyperOS часто связана с бюджетными устройствами Redmi, где оболочка урезана. В случае с Xiaomi 14T она работает плавно. По данным источников, устройство будет обновляться до 2029 года, включая Android 19 и HyperOS 7. Однако автор не рекомендует обновляться до последней версии Android, так как она может оказаться слишком тяжелой для данного железа.</p>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 8.webp" alt="Камера 50 Мп">
+          <figcaption>Камера 50мп</figcaption>
+        </figure>
+
+        <h2>Характеристики</h2>
+
+        <div class="specs">
+          <table>
+            <tr><td>Процессор</td><td>MediaTek Dimensity 8300 Ultra</td></tr>
+            <tr><td>Графика</td><td>Mali-G615</td></tr>
+            <tr><td>Оперативная память</td><td>12 ГБ (расширение до 24 ГБ виртуально)</td></tr>
+            <tr><td>Экран</td><td>AMOLED 6,67", 144 Гц, 4000 нит</td></tr>
+            <tr><td>Основная камера</td><td>50 Мп (Leica) + OIS</td></tr>
+            <tr><td>Телевик</td><td>50 Мп</td></tr>
+            <tr><td>Широкоугольная</td><td>12 Мп</td></tr>
+            <tr><td>Фронтальная камера</td><td>32 Мп, 4K при 30 к/с</td></tr>
+            <tr><td>Аккумулятор</td><td>5000 мА·ч</td></tr>
+            <tr><td>Зарядка</td><td>67 Вт проводная (беспроводной нет)</td></tr>
+            <tr><td>ОС</td><td>HyperOS 2</td></tr>
+            <tr><td>Обновления</td><td>до 2029 (Android 19, HyperOS 7)</td></tr>
+          </table>
+        </div>
+
+        <h2>Звук</h2>
+
+        <p>Динамики показали хорошее качество, но без детальных подробностей — отдельного аудиотеста в рамках этого обзора не проводилось.</p>
+
+        <h2>Плюсы и минусы</h2>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h3>Плюсы</h3>
+            <ul>
+              <li>Камеры Leica с OIS — качество выше класса</li>
+              <li>Мощный Dimensity 8300 Ultra</li>
+              <li>Яркий AMOLED 144 Гц (4000 нит)</li>
+              <li>Полная комплектация: 67 Вт + чехол</li>
+              <li>Минимальный троттлинг (до 87%)</li>
+              <li>HyperOS 2 — плавная работа</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h3>Минусы</h3>
+            <ul>
+              <li>Пластиковые вставки в корпусе</li>
+              <li>Скользкая стеклянная спинка</li>
+              <li>Нагрев при базовых задачах</li>
+              <li>Нет беспроводной зарядки</li>
+              <li>Шумный видеозум 12x</li>
+              <li>144 Гц — только в играх</li>
+            </ul>
+          </div>
+        </div>
+
+        <figure>
+          <img src="images/xiaomi 14t/xiaomi 14t 9.webp" alt="Xiaomi Экосистема">
+          <figcaption>Xiaomi Экосистема</figcaption>
+        </figure>
+
+        <div class="verdict">
+          <h2>Вердикт</h2>
+          <p>Xiaomi 14T — сбалансированный субфлагман с отличными камерами Leica, высокой производительностью и ярким экраном. Компромиссы в виде пластиковых вставок и отсутствия беспроводной зарядки компенсируются ценой и мощной начинкой.</p>
+          <p>За аналогичную стоимость (около 25 000 рублей) можно рассмотреть Honor 200 Pro с лучшей камерой. Но в целом Xiaomi 14T оставил приятное впечатление — это достойный повседневный аппарат.</p>
+        </div>
+
+        <a class="article-cta" href="https://www.youtube.com/watch?v=ikxs80-PfG8&t=4s" target="_blank" rel="noopener">
+          <div>
+            <div class="article-cta-label">Канал Telephonerrr</div>
+            <div class="article-cta-desc">Смотреть видеообзор на YouTube</div>
+          </div>
+          <span class="article-cta-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Telephonerrr. Обзоры без воды.</p>
+    <div class="footer-nav">
+      <a href="#">Telegram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(name) {
+      html.setAttribute('data-theme', name);
+      buttons.forEach(function(b) {
+        b.classList.toggle('active', b.dataset.theme === name);
+      });
+      try { localStorage.setItem('telephonerrr-theme', name); } catch (e) {}
+    }
+
+    var saved = 'light';
+    try { saved = localStorage.getItem('telephonerrr-theme') || 'light'; } catch (e) {}
+    setTheme(saved);
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTheme(btn.dataset.theme);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

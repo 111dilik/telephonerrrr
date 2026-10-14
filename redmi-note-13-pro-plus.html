@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redmi Note 13 Pro Plus — Telephonerrr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html[data-theme="light"] {
+    --bg: #ffffff; --bg-soft: #f4f9f4; --card: #ffffff;
+    --border: #e3ede3; --text: #0e1a0e; --text-soft: #5a6b5a;
+    --accent: #16a34a; --accent-soft: #dcfce7; --accent-hover: #15803d;
+  }
+  html[data-theme="dark"] {
+    --bg: #0b1310; --bg-soft: #101a16; --card: #142019;
+    --border: #1f2f26; --text: #e8f5ec; --text-soft: #8fa696;
+    --accent: #22c55e; --accent-soft: #14331f; --accent-hover: #4ade80;
+  }
+  html[data-theme="black"] {
+    --bg: #000000; --bg-soft: #0a0a0a; --card: #111111;
+    --border: #1f1f1f; --text: #ffffff; --text-soft: #888888;
+    --accent: #22c55e; --accent-soft: #0f2417; --accent-hover: #4ade80;
+  }
+  html[data-theme="blue"] {
+    --bg: #f6faff; --bg-soft: #eaf2ff; --card: #ffffff;
+    --border: #d6e4f7; --text: #0a1a33; --text-soft: #5a6b85;
+    --accent: #2563eb; --accent-soft: #dbeafe; --accent-hover: #1d4ed8;
+  }
+  html[data-theme="amber"] {
+    --bg: #fffbf2; --bg-soft: #fef3d9; --card: #ffffff;
+    --border: #f2e2b8; --text: #2a1d00; --text-soft: #7a6a3f;
+    --accent: #d97706; --accent-soft: #fef3c7; --accent-hover: #b45309;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Commissioner', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  header.site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; gap: 20px; flex-wrap: nowrap;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700; font-size: 22px;
+    letter-spacing: -0.3px; white-space: nowrap; flex-shrink: 0;
+  }
+  .logo-img { width: 34px; height: 34px; object-fit: contain; flex-shrink: 0; }
+  .logo-accent { color: var(--accent); }
+
+  .themes { display: flex; gap: 8px; flex-shrink: 0; }
+  .theme-btn {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer; padding: 0;
+    transition: transform .15s, border-color .15s;
+  }
+  .theme-btn:hover { transform: scale(1.15); }
+  .theme-btn.active { border-color: var(--accent); transform: scale(1.15); }
+  .theme-light { background: linear-gradient(135deg, #ffffff 50%, #16a34a 50%); }
+  .theme-dark  { background: linear-gradient(135deg, #0b1310 50%, #22c55e 50%); }
+  .theme-black { background: linear-gradient(135deg, #000000 50%, #22c55e 50%); }
+  .theme-blue  { background: linear-gradient(135deg, #f6faff 50%, #2563eb 50%); }
+  .theme-amber { background: linear-gradient(135deg, #fffbf2 50%, #d97706 50%); }
+
+  .breadcrumb {
+    padding: 24px 0 0;
+    font-size: 14px; color: var(--text-soft);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--text-soft); transition: color .15s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { opacity: 0.4; }
+  .breadcrumb .current { color: var(--text); }
+
+  .article-page { padding: 20px 0 60px; }
+  .article-wrap { max-width: 720px; margin: 0 auto; }
+
+  .article-category {
+    display: inline-block;
+    padding: 5px 12px; border-radius: 100px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin-bottom: 18px;
+  }
+
+  .article-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.4px;
+    margin-bottom: 28px; color: var(--text);
+  }
+
+  .article-hero {
+    margin: 0 0 32px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-hero img { width: 100%; height: auto; display: block; }
+
+  .article-content {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .article-content p { margin-bottom: 20px; }
+  .article-content .lead {
+    font-size: 19px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .article-content h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(22px, 3vw, 26px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin: 44px 0 18px;
+  }
+  .article-content ul {
+    margin: 0 0 22px 22px;
+    padding: 0;
+  }
+  .article-content li { margin-bottom: 8px; }
+  .article-content strong { font-weight: 700; }
+
+  .article-content figure {
+    margin: 32px 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-content figure img { width: 100%; height: auto; display: block; }
+
+  .specs {
+    margin: 32px 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .specs table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .specs td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .specs tr:last-child td { border-bottom: none; }
+  .specs td:first-child { color: var(--text-soft); width: 42%; font-weight: 500; }
+  .specs td:last-child { font-weight: 600; }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pros-cons > div {
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .pros-cons h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .pros-cons ul { margin: 0; padding: 0; list-style: none; }
+  .pros-cons li {
+    font-size: 15px;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .pros-cons .pros h3 { color: var(--accent); }
+  .pros-cons .cons h3 { color: #e11d48; }
+  .pros-cons .pros li::before {
+    content: "+"; position: absolute; left: 4px;
+    color: var(--accent); font-weight: 700;
+  }
+  .pros-cons .cons li::before {
+    content: "−"; position: absolute; left: 4px;
+    color: #e11d48; font-weight: 700;
+  }
+
+  .verdict {
+    margin: 36px 0 20px;
+    padding: 28px 30px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+  }
+  .verdict h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .article-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    margin: 32px 0 0;
+    padding: 22px 26px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    transition: transform .15s, background .15s, border-color .15s;
+  }
+  .article-cta:hover {
+    transform: translateY(-2px);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .article-cta:hover .article-cta-label,
+  .article-cta:hover .article-cta-desc,
+  .article-cta:hover .article-cta-arrow { color: #fff; }
+  .article-cta-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    transition: color .15s;
+  }
+  .article-cta-desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    transition: color .15s;
+  }
+  .article-cta-arrow {
+    font-size: 24px;
+    color: var(--accent);
+    transition: color .15s, transform .15s;
+  }
+  .article-cta:hover .article-cta-arrow { transform: translateX(4px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 30px;
+    background: var(--bg-soft);
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { color: var(--text-soft); font-size: 14px; }
+  .footer-nav { display: flex; gap: 24px; font-size: 14px; }
+  .footer-nav a { color: var(--text-soft); transition: color .15s; }
+  .footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .logo { font-size: 18px; }
+    .logo-img { width: 28px; height: 28px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .article-content { font-size: 16px; }
+    .article-cta { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/Logo.webp" alt="Telephonerrr" class="logo-img" onerror="this.style.display='none'">
+      <span>Telephone<span class="logo-accent">rrr</span></span>
+    </a>
+
+    <div class="themes" id="themes">
+      <button class="theme-btn theme-light active" data-theme="light" title="Светлая"></button>
+      <button class="theme-btn theme-dark" data-theme="dark" title="Тёмная"></button>
+      <button class="theme-btn theme-black" data-theme="black" title="Чёрная"></button>
+      <button class="theme-btn theme-blue" data-theme="blue" title="Синяя"></button>
+      <button class="theme-btn theme-amber" data-theme="amber" title="Янтарная"></button>
+    </div>
+  </div>
+</header>
+
+<main class="article-page">
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <span class="sep">/</span>
+      <a href="#">Смартфоны</a>
+      <span class="sep">/</span>
+      <span class="current">Redmi Note 13 Pro Plus</span>
+    </nav>
+
+    <div class="article-wrap">
+
+      <div class="article-category">Смартфоны</div>
+
+      <h1 class="article-title">Redmi Note 13 Pro Plus: премиальный дизайн, экран-водопад и маленькая стоимость</h1>
+
+      <figure class="article-hero">
+        <img src="images/redmi not 13 pp/redmi not 13 pp 18.png" alt="Redmi Note 13 Pro Plus">
+      </figure>
+
+      <div class="article-content">
+
+        <p class="lead">Redmi Note 13 Pro Plus — средний бюджетник. На момент выхода он стоил около 50 000 рублей, а сейчас его можно найти за 17 000 за версию 256 ГБ и за 22 000 за 512 ГБ. Телефон вышел в 2023 году, поэтому он актуален и сейчас. Сегодня расскажу его характеристики, плюсы, минусы и много всего прочего. Заваривайте чайку — а мы начинаем.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 1.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Комплектация</h2>
+
+        <p>Комплектация приятная. В коробке лежит инструкция, матовый чехол тёмного цвета, сам телефон, кабель и блок зарядки на 120 Вт.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 2.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Дизайн</h2>
+
+        <p>Телефон отличается изогнутым экраном, а точнее водопадом. Хоть он и хрупкий, но это выглядит красиво и стильно. Также у телефона двухцветная стеклянная крышка, что тоже выглядит стильно. Пожалуй, это самый лучший дизайн этой линейки.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 3.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Камеры</h2>
+
+        <p>Тут стоит широкоугольный объектив на 8 мегапикселей, макрообъектив на 8 мегапикселей и основная камера на 200 мегапикселей. Так что снимки получаются детализированными и с насыщенными цветами. Четырёхкратный зум без потери качества. И самый главный минус — это съёмка в 4К при 30 FPS. Не знаю, почему не добавили 60 FPS, но да ладно.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 4.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <p>Камера тут лучше, чем у 12 Айфона, OnePlus 10, Xiaomi Mi 11, а также Samsung S10 Plus. За его цену на дату выхода камера хорошая.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 5.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Экран</h2>
+
+        <p>У него стоит AMOLED экран с диагональю 6,67 дюйма и частотой обновления 120 Гц. Также у него есть технологии HDR Plus и Dolby Vision. Экран яркий, насыщенный — 1 800 нит.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 6.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Производительность</h2>
+
+        <p>Процессор у него стоит с 12 ГБ оперативной памяти с расширением до 24 ГБ, а также четырёхнанoметровый флагманский процессор MediaTek Dimensity 7200 Ultra, который набирает всего 800 000 баллов в AnTuTu. У OnePlus Nord 3 стоит за ту же цену процессор MediaTek Dimensity 9000. Хоть он и мощнее, но разница между этими процессорами маленькая, так что они не сильно различаются.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 7.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Батарея и зарядка</h2>
+
+        <p>Тут стоит батарея на 5 000 мА·ч, но, к сожалению, Redmi не показал впечатляющие показания автономности. Тут она всего лишь 10 часов 38 минут активного использования. Данные хорошие, надо посмотреть сравнение автономности конкурентов. Выводы также делайте сами.</p>
+
+        <p>На 100 % Redmi положили в комплект 120-ваттную зарядку, которая от нуля до 100 % заряжается за 25 минут. Например, вы опаздываете, поставили телефон зарядиться — и за 5 минут он вам зарядил 31%. Так что это жирный плюс.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 8.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Динамики и ПО</h2>
+
+        <p>Тут стоят стереодинамики с технологией Dolby Atmos. Звучат громко — 88,7 дБ.</p>
+
+        <p>Оболочка тут HyperOS 2, которая будет обновляться 4 года. Есть телефон глобальной версии, но если он китайский, то будет обновляться всего лишь 3 года. Телефон вышел в 2023 году, так что если он глобальный, то обновление закончится в 2027 году, а если он китайский, то обновление закончится в 2026. Про HyperOS рассказывал в обзоре Xiaomi 14T — смотрите предыдущее видео.</p>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 9.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Характеристики</h2>
+
+        <div class="specs">
+          <table>
+            <tr><td>Процессор</td><td>MediaTek Dimensity 7200 Ultra</td></tr>
+            <tr><td>Оперативная память</td><td>12 ГБ (расширение до 24 ГБ)</td></tr>
+            <tr><td>Накопитель</td><td>256 / 512 ГБ</td></tr>
+            <tr><td>Экран</td><td>AMOLED 6,67", 120 Гц, 1800 нит</td></tr>
+            <tr><td>Основная камера</td><td>200 Мп</td></tr>
+            <tr><td>Широкоугольная</td><td>8 Мп</td></tr>
+            <tr><td>Макро</td><td>8 Мп</td></tr>
+            <tr><td>Видео</td><td>4K при 30 FPS</td></tr>
+            <tr><td>Аккумулятор</td><td>5000 мА·ч</td></tr>
+            <tr><td>Зарядка</td><td>120 Вт, 0–100 % за 25 мин</td></tr>
+            <tr><td>Защита</td><td>IP68</td></tr>
+            <tr><td>ОС</td><td>HyperOS 2</td></tr>
+          </table>
+        </div>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 10.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <h2>Плюсы и минусы</h2>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h3>Плюсы</h3>
+            <ul>
+              <li>Стильный премиальный дизайн</li>
+              <li>Маленькая стоимость</li>
+              <li>Приятные материалы</li>
+              <li>Быстрая зарядка на 120 Вт</li>
+              <li>Хорошая комплектация</li>
+              <li>Хорошие динамики</li>
+              <li>Детализированные снимки</li>
+              <li>Четырёхкратный зум без потери качества</li>
+              <li>Оптический сканер пальцев под экраном</li>
+              <li>Защита IP68</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h3>Минусы</h3>
+            <ul>
+              <li>Автономность не самая лучшая</li>
+              <li>Процессор не лучше конкурентов</li>
+              <li>Датчик освещённости работает с опозданиями</li>
+              <li>Много предустановленных приложений</li>
+              <li>SMD-дисплей</li>
+            </ul>
+          </div>
+        </div>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 11.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 12.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 13.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 14.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <div class="verdict">
+          <h2>Вердикт</h2>
+          <p>На этом обзор закончен. Я посоветую телефон тем, кто не гонится за характеристиками, не хочет сильно профессиональную камеру, а хочет просто приятный телефон для повседневного использования. Так что я советую именно этот Redmi.</p>
+        </div>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 15.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 16.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <figure>
+          <img src="images/redmi not 13 pp/redmi not 13 pp 17.png" alt="Redmi Note 13 Pro Plus">
+        </figure>
+
+        <a class="article-cta" href="https://www.youtube.com/watch?v=QnZCgd8EGLs" target="_blank" rel="noopener">
+          <div>
+            <div class="article-cta-label">Канал Telephonerrr</div>
+            <div class="article-cta-desc">Смотреть видеообзор на YouTube</div>
+          </div>
+          <span class="article-cta-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Telephonerrr. Обзоры без воды.</p>
+    <div class="footer-nav">
+      <a href="#">Telegram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(name) {
+      html.setAttribute('data-theme', name);
+      buttons.forEach(function(b) {
+        b.classList.toggle('active', b.dataset.theme === name);
+      });
+      try { localStorage.setItem('telephonerrr-theme', name); } catch (e) {}
+    }
+
+    var saved = 'light';
+    try { saved = localStorage.getItem('telephonerrr-theme') || 'light'; } catch (e) {}
+    setTheme(saved);
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTheme(btn.dataset.theme);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

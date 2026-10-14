@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Наушники VGN VXE V1 — Telephonerrr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html[data-theme="light"] {
+    --bg: #ffffff; --bg-soft: #f4f9f4; --card: #ffffff;
+    --border: #e3ede3; --text: #0e1a0e; --text-soft: #5a6b5a;
+    --accent: #16a34a; --accent-soft: #dcfce7; --accent-hover: #15803d;
+  }
+  html[data-theme="dark"] {
+    --bg: #0b1310; --bg-soft: #101a16; --card: #142019;
+    --border: #1f2f26; --text: #e8f5ec; --text-soft: #8fa696;
+    --accent: #22c55e; --accent-soft: #14331f; --accent-hover: #4ade80;
+  }
+  html[data-theme="black"] {
+    --bg: #000000; --bg-soft: #0a0a0a; --card: #111111;
+    --border: #1f1f1f; --text: #ffffff; --text-soft: #888888;
+    --accent: #22c55e; --accent-soft: #0f2417; --accent-hover: #4ade80;
+  }
+  html[data-theme="blue"] {
+    --bg: #f6faff; --bg-soft: #eaf2ff; --card: #ffffff;
+    --border: #d6e4f7; --text: #0a1a33; --text-soft: #5a6b85;
+    --accent: #2563eb; --accent-soft: #dbeafe; --accent-hover: #1d4ed8;
+  }
+  html[data-theme="amber"] {
+    --bg: #fffbf2; --bg-soft: #fef3d9; --card: #ffffff;
+    --border: #f2e2b8; --text: #2a1d00; --text-soft: #7a6a3f;
+    --accent: #d97706; --accent-soft: #fef3c7; --accent-hover: #b45309;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Commissioner', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  header.site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0; gap: 20px; flex-wrap: nowrap;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700; font-size: 22px;
+    letter-spacing: -0.3px; white-space: nowrap; flex-shrink: 0;
+  }
+  .logo-img { width: 34px; height: 34px; object-fit: contain; flex-shrink: 0; }
+  .logo-accent { color: var(--accent); }
+
+  .themes { display: flex; gap: 8px; flex-shrink: 0; }
+  .theme-btn {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer; padding: 0;
+    transition: transform .15s, border-color .15s;
+  }
+  .theme-btn:hover { transform: scale(1.15); }
+  .theme-btn.active { border-color: var(--accent); transform: scale(1.15); }
+  .theme-light { background: linear-gradient(135deg, #ffffff 50%, #16a34a 50%); }
+  .theme-dark  { background: linear-gradient(135deg, #0b1310 50%, #22c55e 50%); }
+  .theme-black { background: linear-gradient(135deg, #000000 50%, #22c55e 50%); }
+  .theme-blue  { background: linear-gradient(135deg, #f6faff 50%, #2563eb 50%); }
+  .theme-amber { background: linear-gradient(135deg, #fffbf2 50%, #d97706 50%); }
+
+  .breadcrumb {
+    padding: 24px 0 0;
+    font-size: 14px; color: var(--text-soft);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .breadcrumb a { color: var(--text-soft); transition: color .15s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { opacity: 0.4; }
+  .breadcrumb .current { color: var(--text); }
+
+  .article-page { padding: 20px 0 60px; }
+  .article-wrap { max-width: 720px; margin: 0 auto; }
+
+  .article-category {
+    display: inline-block;
+    padding: 5px 12px; border-radius: 100px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin-bottom: 18px;
+  }
+
+  .article-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.4px;
+    margin-bottom: 28px; color: var(--text);
+  }
+
+  .article-hero {
+    margin: 0 0 32px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-hero img { width: 100%; height: auto; display: block; }
+
+  .article-content {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .article-content p { margin-bottom: 20px; }
+  .article-content .lead {
+    font-size: 19px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+  .article-content h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: clamp(22px, 3vw, 26px);
+    font-weight: 700; line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin: 44px 0 18px;
+  }
+  .article-content ul {
+    margin: 0 0 22px 22px;
+    padding: 0;
+  }
+  .article-content li { margin-bottom: 8px; }
+  .article-content strong { font-weight: 700; }
+
+  .article-content figure {
+    margin: 32px 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .article-content figure img { width: 100%; height: auto; display: block; }
+
+  .article-content blockquote {
+    margin: 24px 0;
+    padding: 14px 20px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-soft);
+    border-radius: 0 10px 10px 0;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+  .article-content blockquote p { margin: 0 0 8px; }
+  .article-content blockquote p:last-child { margin-bottom: 0; }
+
+  .specs {
+    margin: 32px 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .specs table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .specs td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .specs tr:last-child td { border-bottom: none; }
+  .specs td:first-child { color: var(--text-soft); width: 55%; font-weight: 500; }
+  .specs td:last-child { font-weight: 600; }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .pros-cons > div {
+    padding: 20px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .pros-cons h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .pros-cons ul { margin: 0; padding: 0; list-style: none; }
+  .pros-cons li {
+    font-size: 15px;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .pros-cons .pros h3 { color: var(--accent); }
+  .pros-cons .cons h3 { color: #e11d48; }
+  .pros-cons .pros li::before {
+    content: "+"; position: absolute; left: 4px;
+    color: var(--accent); font-weight: 700;
+  }
+  .pros-cons .cons li::before {
+    content: "−"; position: absolute; left: 4px;
+    color: #e11d48; font-weight: 700;
+  }
+
+  .verdict {
+    margin: 36px 0 20px;
+    padding: 28px 30px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+  }
+  .verdict h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    margin: 0 0 12px;
+  }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .article-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    margin: 32px 0 0;
+    padding: 22px 26px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    transition: transform .15s, background .15s, border-color .15s;
+  }
+  .article-cta:hover {
+    transform: translateY(-2px);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .article-cta:hover .article-cta-label,
+  .article-cta:hover .article-cta-desc,
+  .article-cta:hover .article-cta-arrow { color: #fff; }
+  .article-cta-label {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    transition: color .15s;
+  }
+  .article-cta-desc {
+    font-size: 14px;
+    color: var(--text-soft);
+    transition: color .15s;
+  }
+  .article-cta-arrow {
+    font-size: 24px;
+    color: var(--accent);
+    transition: color .15s, transform .15s;
+  }
+  .article-cta:hover .article-cta-arrow { transform: translateX(4px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 30px;
+    background: var(--bg-soft);
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { color: var(--text-soft); font-size: 14px; }
+  .footer-nav { display: flex; gap: 24px; font-size: 14px; }
+  .footer-nav a { color: var(--text-soft); transition: color .15s; }
+  .footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .logo { font-size: 18px; }
+    .logo-img { width: 28px; height: 28px; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .article-content { font-size: 16px; }
+    .article-cta { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/Logo.webp" alt="Telephonerrr" class="logo-img" onerror="this.style.display='none'">
+      <span>Telephone<span class="logo-accent">rrr</span></span>
+    </a>
+
+    <div class="themes" id="themes">
+      <button class="theme-btn theme-light active" data-theme="light" title="Светлая"></button>
+      <button class="theme-btn theme-dark" data-theme="dark" title="Тёмная"></button>
+      <button class="theme-btn theme-black" data-theme="black" title="Чёрная"></button>
+      <button class="theme-btn theme-blue" data-theme="blue" title="Синяя"></button>
+      <button class="theme-btn theme-amber" data-theme="amber" title="Янтарная"></button>
+    </div>
+  </div>
+</header>
+
+<main class="article-page">
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <a href="index.html">Главная</a>
+      <span class="sep">/</span>
+      <a href="#">Аудио</a>
+      <span class="sep">/</span>
+      <span class="current">VGN VXE V1</span>
+    </nav>
+
+    <div class="article-wrap">
+
+      <div class="article-category">Аудио</div>
+
+      <h1 class="article-title">Наушники VGN VXE V1: обзор бюджетной беспроводной гарнитуры за ~2000 рублей</h1>
+
+      <figure class="article-hero">
+        <img src="images/vgnvxev1/vgnvxe v1 1.png" alt="VGN VXE V1">
+      </figure>
+
+      <div class="article-content">
+
+        <h2>Введение</h2>
+
+        <p class="lead">Наушники — аксессуар, который изнашивается быстрее всего. Амбушюры истираются, пластик трескается, аккумулятор теряет ёмкость. Именно с такой ситуацией столкнулся автор канала «Телефонер»: его старым наушникам исполнилось семь лет, они были грязными и порванными. На замену были выбраны VGN VXE V1 — бюджетная беспроводная гарнитура, которая привлекла ценой около 2000 рублей и поддержкой сразу двух режимов подключения: 2,4 ГГц через USB-донгл и Bluetooth 5.3.</p>
+
+        <p>Этот обзор основан на личном опыте использования, а также дополнен техническими данными из официальной документации и отзывами реальных покупателей, что позволяет составить объективную картину об устройстве.</p>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 2.png" alt="VGN VXE V1">
+        </figure>
+
+        <h2>Комплектация и первые впечатления</h2>
+
+        <p>Поставка осуществляется в компактной коробке. В комплект входят:</p>
+
+        <ul>
+          <li>сами наушники;</li>
+          <li>USB-приёмник (донгл) на 2,4 ГГц;</li>
+          <li>кабель для зарядки Type-C;</li>
+          <li>инструкция.</li>
+        </ul>
+
+        <p>Инструкция, к сожалению, выполнена на китайском языке, что создаёт определённые неудобства при первоначальной настройке. Тем не менее, базовое управление интуитивно понятно, а подробные инструкции по подключению можно найти в интернете.</p>
+
+        <p>Наушники доступны в двух расцветках: белой и чёрной. Автор выбрал чёрную версию, которая лучше сочетается с его рабочим местом и менее подвержена загрязнению. Дизайн устройства лаконичный, без кричащих элементов, что делает его универсальным для повседневного использования.</p>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 3.png" alt="VGN VXE V1">
+        </figure>
+
+        <h2>Технические характеристики</h2>
+
+        <div class="specs">
+          <table>
+            <tr><td>Ёмкость аккумулятора</td><td>300 мА·ч</td></tr>
+            <tr><td>Время работы в режиме 2,4 ГГц</td><td>до 27 часов</td></tr>
+            <tr><td>Время работы в режиме Bluetooth</td><td>до 28 часов</td></tr>
+            <tr><td>Время зарядки</td><td>~2,5 часа</td></tr>
+            <tr><td>Время ожидания</td><td>более 200 часов</td></tr>
+            <tr><td>Частотный диапазон</td><td>20 Гц – 20 кГц</td></tr>
+            <tr><td>Чувствительность</td><td>96 ± 3 дБ</td></tr>
+            <tr><td>Чувствительность микрофона</td><td>−38 ± 3 дБ</td></tr>
+            <tr><td>Максимальная дальность передачи</td><td>10 метров</td></tr>
+            <tr><td>Вес</td><td>~200 граммов</td></tr>
+          </table>
+        </div>
+
+        <p>Следует отметить, что в некоторых источниках указаны иные данные: ёмкость батареи 500 или 960 мА·ч, время работы до 85 часов. Однако официальная документация производителя приводит более скромные цифры, которые, судя по отзывам пользователей, ближе к реальности.</p>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 4.png" alt="VGN VXE V1">
+        </figure>
+
+        <h2>Подключение и настройка</h2>
+
+        <p>VGN VXE V1 поддерживают три режима подключения: 2,4 ГГц через донгл, Bluetooth 5.3 и проводное соединение. На практике подключение к донглу может вызвать затруднения у неопытных пользователей. Один из покупателей подробно описал процесс сопряжения: необходимо включить наушники, зажать кнопку микрофона на 5–7 секунд до звукового сигнала, затем дважды нажать кнопку включения для переключения режимов и снова удерживать кнопку до писка. После этого донгл подключается к компьютеру, и наушники автоматически устанавливают соединение.</p>
+
+        <p>Звуковой ассистент устройства говорит исключительно на китайском языке, и перенастроить его на другие языки невозможно. Для многих пользователей это становится неожиданностью, хотя со временем к этому можно привыкнуть.</p>
+
+        <h2>Качество звука</h2>
+
+        <p>Звучание VGN VXE V1 — тема неоднозначная. В отзывах пользователи сходятся во мнении, что для игр звук вполне приемлем: позиционирование шагов и выстрелов работает, задержка через донгл минимальна (около 15 мс), что подтверждается описанием на торговых площадках. Однако для прослушивания музыки ситуация иная.</p>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 5.png" alt="VGN VXE V1">
+        </figure>
+
+        <p>По данным анализа 67 отзывов, звук в музыкальном режиме описывается как «посредственный»: низкие и высокие частоты могут хрипеть или «захлёбываться», создавая эффект «звука из бочки». Многие пользователи отмечают, что без настройки эквалайзера звучание кажется тихим и искажённым. После подкрутки частот через сторонние программы звук становится приемлемым, но это требует времени и определённых навыков.</p>
+
+        <p>По Bluetooth качество звука заметно хуже, чем через донгл. Это связано с более узкой пропускной способностью канала и отсутствием оптимизации под музыкальное воспроизведение.</p>
+
+        <h2>Микрофон</h2>
+
+        <p>Микрофон VGN VXE V1 — один из самых противоречивых элементов устройства. С одной стороны, многие пользователи хвалят его для игрового общения: в Discord и других голосовых чатах собеседники не жалуются на качество, шумоподавление ENC работает и отсекает фоновые звуки. Микрофон выдвижной, его можно убрать, когда он не нужен, что удобно для использования на улице.</p>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 6.png" alt="VGN VXE V1">
+        </figure>
+
+        <p>С другой стороны, существует ряд серьёзных нареканий. Некоторые пользователи сообщают о «фонящем» звуке, «треске» спустя 15 минут использования и даже о том, что микрофон «глушит сам себя», то есть подавляет собственный голос. Один из обзоров резюмирует: «Микрофон без шумоподавления, далеко расположен от рта, поэтому приходится говорить громче, а по качеству звука он посредственный».</p>
+
+        <p>Таким образом, микрофон подойдёт для непринудительного игрового общения, но для записи голоса или стриминга его возможностей может не хватить.</p>
+
+        <h2>Автономность</h2>
+
+        <p>Заявленное время работы — до 28 часов. На практике пользователи сообщают о 5–10 часах ежедневного использования, что соответствует 2–3 дням или примерно неделе при умеренной нагрузке. Автор обзора подтверждает: после первой зарядки наушники работали около недели, после чего появилось уведомление о низком заряде. Зарядка занимает примерно 30 минут для восстановления работоспособности на очередную неделю.</p>
+
+        <p>Со временем автономность может снижаться. Некоторые пользователи отмечают падение до 3–4 часов спустя несколько месяцев использования.</p>
+
+        <h2>Качество сборки и долговечность</h2>
+
+        <p>Это, пожалуй, самый серьёзный недостаток VGN VXE V1. Многочисленные отзывы указывают на хрупкость конструкции. Типичные комментарии:</p>
+
+        <blockquote>
+          <p>«Пластик плохой, верхняя дужка сломалась в двух местах. Держится на отделке. Наушники на пару месяцев».</p>
+          <p>«Очень хрупкие, сломались на 3-й день использования».</p>
+          <p>«Оголовье лопнуло спустя месяц».</p>
+          <p>«Спустя 3 месяца отвалилось левое ухо, потом сломалось оголовье».</p>
+        </blockquote>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 7.png" alt="VGN VXE V1">
+        </figure>
+
+        <p>Конструкция оголовья представляет собой две тонкие трубки, соединённые в нескольких точках, что делает её уязвимой даже при аккуратном обращении. Многие пользователи приходят к выводу, что эти наушники — «временный вариант на полмесяца-месяц».</p>
+
+        <h2>Сравнение с Logitech G435</h2>
+
+        <p>VGN VXE V1 часто позиционируются как бюджетная альтернатива Logitech G435. Сравнение показывает:</p>
+
+        <ul>
+          <li><strong>Автономность:</strong> VGN выигрывает (28 часов против ~18 у G435).</li>
+          <li><strong>Микрофон:</strong> мнения расходятся, но часть пользователей считает микрофон VGN лучше.</li>
+          <li><strong>Вес:</strong> сопоставим (около 200 граммов).</li>
+          <li><strong>Качество сборки:</strong> G435 надёжнее, VGN хрупче.</li>
+          <li><strong>Цена:</strong> VGN значительно дешевле.</li>
+        </ul>
+
+        <p>Таким образом, выбор зависит от приоритетов: если важна цена и автономность — VGN; если долговечность и стабильность — G435.</p>
+
+        <h2>Плюсы и минусы</h2>
+
+        <div class="pros-cons">
+          <div class="pros">
+            <h3>Плюсы</h3>
+            <ul>
+              <li>Низкая цена (~2000 ₽)</li>
+              <li>Лёгкий вес, комфортная посадка</li>
+              <li>Длительная автономность</li>
+              <li>Стабильное подключение через донгл</li>
+              <li>Минимальная задержка (~15 мс)</li>
+              <li>Тканевые амбушюры, которые не потеют</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h3>Минусы</h3>
+            <ul>
+              <li>Хрупкая конструкция, частые поломки оголовья</li>
+              <li>Посредственный звук для музыки</li>
+              <li>Противоречивое качество микрофона</li>
+              <li>Китайская озвучка кнопок</li>
+              <li>Инструкция только на китайском</li>
+              <li>Нестабильная работа по Bluetooth</li>
+            </ul>
+          </div>
+        </div>
+
+        <figure>
+          <img src="images/vgnvxev1/vgnvxe v1 8.png" alt="VGN VXE V1">
+        </figure>
+
+        <div class="verdict">
+          <h2>Итог</h2>
+          <p>VGN VXE V1 — это типичный представитель бюджетного сегмента, где производитель пожертвовал качеством материалов и звуковой настройкой ради низкой цены и длительной автономности. Для игровых сессий в недорогих проектах, прослушивания подкастов или видеороликов на YouTube этих наушников может быть достаточно. Однако если вы ищете устройство, которое прослужит хотя бы год, стоит либо доплатить за более надёжную модель, либо быть готовым к тому, что через пару месяцев наушники придётся менять.</p>
+          <p>Как справедливо отмечает один из пользователей: «Скупой платит дважды, лучше изначально вложиться в вариант подороже».</p>
+        </div>
+
+        <a class="article-cta" href="https://www.youtube.com/watch?v=GBzFaedngKQ&t=10s" target="_blank" rel="noopener">
+          <div>
+            <div class="article-cta-label">Канал Telephonerrr</div>
+            <div class="article-cta-desc">Смотреть видеообзор на YouTube</div>
+          </div>
+          <span class="article-cta-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Telephonerrr. Обзоры без воды.</p>
+    <div class="footer-nav">
+      <a href="#">Telegram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(name) {
+      html.setAttribute('data-theme', name);
+      buttons.forEach(function(b) {
+        b.classList.toggle('active', b.dataset.theme === name);
+      });
+      try { localStorage.setItem('telephonerrr-theme', name); } catch (e) {}
+    }
+
+    var saved = 'light';
+    try { saved = localStorage.getItem('telephonerrr-theme') || 'light'; } catch (e) {}
+    setTheme(saved);
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTheme(btn.dataset.theme);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

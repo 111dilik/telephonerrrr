@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telephonerrr — обзоры гаджетов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html[data-theme="light"] {
+    --bg: #ffffff; --bg-soft: #f4f9f4; --card: #ffffff;
+    --border: #e3ede3; --text: #0e1a0e; --text-soft: #5a6b5a;
+    --accent: #16a34a; --accent-soft: #dcfce7; --accent-hover: #15803d;
+    --shadow: 0 4px 20px rgba(22, 163, 74, 0.08);
+  }
+  html[data-theme="dark"] {
+    --bg: #0b1310; --bg-soft: #101a16; --card: #142019;
+    --border: #1f2f26; --text: #e8f5ec; --text-soft: #8fa696;
+    --accent: #22c55e; --accent-soft: #14331f; --accent-hover: #4ade80;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+  html[data-theme="black"] {
+    --bg: #000000; --bg-soft: #0a0a0a; --card: #111111;
+    --border: #1f1f1f; --text: #ffffff; --text-soft: #888888;
+    --accent: #22c55e; --accent-soft: #0f2417; --accent-hover: #4ade80;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  }
+  html[data-theme="blue"] {
+    --bg: #f6faff; --bg-soft: #eaf2ff; --card: #ffffff;
+    --border: #d6e4f7; --text: #0a1a33; --text-soft: #5a6b85;
+    --accent: #2563eb; --accent-soft: #dbeafe; --accent-hover: #1d4ed8;
+    --shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+  }
+  html[data-theme="amber"] {
+    --bg: #fffbf2; --bg-soft: #fef3d9; --card: #ffffff;
+    --border: #f2e2b8; --text: #2a1d00; --text-soft: #7a6a3f;
+    --accent: #d97706; --accent-soft: #fef3c7; --accent-hover: #b45309;
+    --shadow: 0 4px 20px rgba(217, 119, 6, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Commissioner', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 0; gap: 20px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700; font-size: 24px;
+    letter-spacing: -0.3px;
+  }
+  .logo-img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+  .logo-accent { color: var(--accent); }
+
+  .themes { display: flex; gap: 8px; }
+  .theme-btn {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer; padding: 0;
+    transition: transform .15s, border-color .15s;
+  }
+  .theme-btn:hover { transform: scale(1.15); }
+  .theme-btn.active { border-color: var(--accent); transform: scale(1.15); }
+  .theme-light { background: linear-gradient(135deg, #ffffff 50%, #16a34a 50%); }
+  .theme-dark  { background: linear-gradient(135deg, #0b1310 50%, #22c55e 50%); }
+  .theme-black { background: linear-gradient(135deg, #000000 50%, #22c55e 50%); }
+  .theme-blue  { background: linear-gradient(135deg, #f6faff 50%, #2563eb 50%); }
+  .theme-amber { background: linear-gradient(135deg, #fffbf2 50%, #d97706 50%); }
+
+  .hero { padding: 80px 0 60px; text-align: center; }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 60px);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -1.5px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+
+  section { padding: 40px 0 60px; }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 32px; gap: 20px; flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 800; letter-spacing: -0.8px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  /* ===== КАРТОЧКА ОБЗОРА ===== */
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+  }
+  .card-img {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+  }
+  .card:hover .card-img img { transform: scale(1.05); }
+
+  .card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+  .card-meta {
+    display: flex; gap: 10px; align-items: center;
+    font-size: 12px; color: var(--text-soft);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+  .card-meta .cat { color: var(--accent); }
+  .card h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 19px; font-weight: 700; line-height: 1.35;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+  .card p {
+    font-size: 14px; color: var(--text-soft);
+    margin-bottom: 16px; flex: 1;
+  }
+  .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .card-read {
+    color: var(--accent); font-weight: 600;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0 30px;
+    background: var(--bg-soft);
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { color: var(--text-soft); font-size: 14px; }
+  .footer-nav { display: flex; gap: 24px; font-size: 14px; }
+  .footer-nav a { color: var(--text-soft); transition: color .15s; }
+  .footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .hero { padding: 50px 0 40px; }
+    .logo { font-size: 20px; gap: 10px; }
+    .logo-img { width: 32px; height: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/Logo.png" alt="Telephonerrr" class="logo-img" onerror="this.style.display='none'">
+      <span>Telephone<span class="logo-accent">rrr</span></span>
+    </a>
+
+    <div class="themes" id="themes">
+      <button class="theme-btn theme-light active" data-theme="light" title="Светлая" aria-label="Светлая тема"></button>
+      <button class="theme-btn theme-dark" data-theme="dark" title="Тёмная" aria-label="Тёмная тема"></button>
+      <button class="theme-btn theme-black" data-theme="black" title="Чёрная" aria-label="Чёрная тема"></button>
+      <button class="theme-btn theme-blue" data-theme="blue" title="Синяя" aria-label="Синяя тема"></button>
+      <button class="theme-btn theme-amber" data-theme="amber" title="Янтарная" aria-label="Янтарная тема"></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero container">
+    <h1>Гаджеты, о которых<br>стоит <em>знать</em></h1>
+  </section>
+
+  <section id="reviews" class="container">
+    <div class="section-head">
+      <h2>Свежие обзоры</h2>
+    </div>
+    <div class="grid" id="reviews-grid">
+
+      <a class="card" href="xiaomi-14t.html">
+        <div class="card-img">
+          <img src="images/xiaomi 14t/xiaomi 14t 1.webp" alt="Xiaomi 14T">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Смартфоны</span>
+          </div>
+          <h3>Обзор Xiaomi 14T: сбалансированный субфлагман с мощным железом и компромиссами</h3>
+          <p>Длительный тест: камеры Leica, Dimensity 8300 Ultra, яркий AMOLED 144 Гц и компромиссы, о которых стоит знать.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="samsung-s4.html">
+        <div class="card-img">
+          <img src="images/samsung s4/samsung s4 11.png" alt="Samsung Galaxy S4">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Эксперименты</span>
+          </div>
+          <h3>Эксперимент: неделя с Samsung Galaxy S4 в 2024 году</h3>
+          <p>Купил легендарный флагман 2013 года за 650 рублей. Три дня мучений, внезапные отключения и неожиданные выводы о прогрессе индустрии.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="redmi-note-13-pro-plus.html">
+        <div class="card-img">
+          <img src="images/redmi not 13 pp/redmi not 13 pp 18.png" alt="Redmi Note 13 Pro Plus">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Смартфоны</span>
+          </div>
+          <h3>Redmi Note 13 Pro Plus: премиальный дизайн, экран-водопад и маленькая стоимость</h3>
+          <p>Средний бюджетник, который сейчас берут за 17 000 ₽. Разбираем 200-Мп камеру, экран-водопад, зарядку на 120 Вт и честные минусы.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="vgn-vxe-v1.html">
+        <div class="card-img">
+          <img src="images/vgnvxev1/vgnvxe v1 1.png" alt="VGN VXE V1">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Аудио</span>
+          </div>
+          <h3>Наушники VGN VXE V1: обзор бюджетной беспроводной гарнитуры за ~2000 рублей</h3>
+          <p>Дёшево, легко, 28 часов автономности — но хрупко. Разбираем звук, микрофон, подключение и почему через пару месяцев их придётся менять.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="defender-daily-hb-162.html">
+        <div class="card-img">
+          <img src="images/деш клава/клава 3.png" alt="Defender Daily HB-162">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Периферия</span>
+          </div>
+          <h3>Клавиатура Defender Daily HB-162: обзор самой дешёвой клавиатуры из DNS</h3>
+          <p>Купил за 300 ₽ и проверил в деле. Красивый корпус, но воняет, клавиши залипают, а цифра «1» за полчаса сработала дважды.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="aceline-amic-30.html">
+        <div class="card-img">
+          <img src="images/aceline amic 30/aceline amic-30 3.png" alt="Acelline AMIC 30">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="cat">Аудио</span>
+          </div>
+          <h3>Настольный микрофон Acelline за 370 рублей: обзор самого дешёвого микрофона из DNS</h3>
+          <p>Думал, будет «как у рации» — оказалось достойно. Тест шумоподавления, сравнение с микрофоном VGN VXE V1 и почему на расстоянии вас не слышно.</p>
+          <div class="card-footer">
+            <span class="card-read">Читать обзор →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Telephonerrr. Обзоры без воды.</p>
+    <div class="footer-nav">
+      <a href="#">Telegram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var html = document.documentElement;
+    var buttons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(name) {
+      html.setAttribute('data-theme', name);
+      buttons.forEach(function(b) {
+        b.classList.toggle('active', b.dataset.theme === name);
+      });
+      try { localStorage.setItem('telephonerrr-theme', name); } catch (e) {}
+    }
+
+    var saved = 'light';
+    try { saved = localStorage.getItem('telephonerrr-theme') || 'light'; } catch (e) {}
+    setTheme(saved);
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTheme(btn.dataset.theme);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
